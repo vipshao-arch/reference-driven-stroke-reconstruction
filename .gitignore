@@ -1,0 +1,13 @@
+node_modules/
+dist/
+release/
+.pages-deploy/
+__pycache__/
+*.pyc
+.DS_Store
+analysis/*.png
+analysis/*.jpg
+analysis/*.svg
+analysis/*.deflate
+!.gitkeep
+public/assets/*.mp4

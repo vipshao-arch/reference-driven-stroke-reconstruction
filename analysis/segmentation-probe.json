@@ -1,0 +1,42 @@
+{
+  "q2_d3_x1": {
+    "strictStaticFraction": 0.029211874395551257,
+    "lockedFraction": 0.029211874395551257,
+    "dynamicFraction": 0.9707881256044487,
+    "lockedMaxChannelError": 23.0,
+    "lockedP999ChannelError": 3.0,
+    "lockedMeanChannelError": 0.6540468591929748
+  },
+  "q2_d4_x2": {
+    "strictStaticFraction": 0.030367882616054158,
+    "lockedFraction": 0.015842223766924565,
+    "dynamicFraction": 0.9841577762330754,
+    "lockedMaxChannelError": 14.0,
+    "lockedP999ChannelError": 4.0,
+    "lockedMeanChannelError": 0.5610723392962227
+  },
+  "q3_d5_x2": {
+    "strictStaticFraction": 0.11463559296421663,
+    "lockedFraction": 0.058404859767891684,
+    "dynamicFraction": 0.9415951402321083,
+    "lockedMaxChannelError": 81.0,
+    "lockedP999ChannelError": 4.0,
+    "lockedMeanChannelError": 0.8529016087301257
+  },
+  "q4_d6_x2": {
+    "strictStaticFraction": 0.25698988303916825,
+    "lockedFraction": 0.15141818786266925,
+    "dynamicFraction": 0.8485818121373307,
+    "lockedMaxChannelError": 97.0,
+    "lockedP999ChannelError": 5.0,
+    "lockedMeanChannelError": 1.1041907274865173
+  },
+  "q6_d8_x3": {
+    "strictStaticFraction": 0.48451666767408125,
+    "lockedFraction": 0.32402230415860733,
+    "dynamicFraction": 0.6759776958413927,
+    "lockedMaxChannelError": 103.0,
+    "lockedP999ChannelError": 5.0,
+    "lockedMeanChannelError": 1.3561578555927893
+  }
+}

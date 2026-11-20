@@ -1,0 +1,82 @@
+{
+  "0": {
+    "staticFraction": 2.361127901353965e-05,
+    "lockedFraction": 9.444511605415861e-07,
+    "dynamicFraction": 0.9999990555488395,
+    "dynamicCell2Count": 264704,
+    "dynamicCell2Fraction": 1.0,
+    "maxError": 0
+  },
+  "1": {
+    "staticFraction": 0.0015432331963249517,
+    "lockedFraction": 0.0008868396397485493,
+    "dynamicFraction": 0.9991131603602514,
+    "dynamicCell2Count": 264547,
+    "dynamicCell2Fraction": 0.9994068846711799,
+    "maxError": 1
+  },
+  "2": {
+    "staticFraction": 0.005711096167794971,
+    "lockedFraction": 0.0023167386968085107,
+    "dynamicFraction": 0.9976832613031915,
+    "dynamicCell2Count": 264346,
+    "dynamicCell2Fraction": 0.9986475459381045,
+    "maxError": 2
+  },
+  "3": {
+    "staticFraction": 0.027114248367988394,
+    "lockedFraction": 0.00924145460589942,
+    "dynamicFraction": 0.9907585453941006,
+    "dynamicCell2Count": 263352,
+    "dynamicCell2Fraction": 0.9948924081237911,
+    "maxError": 3
+  },
+  "4": {
+    "staticFraction": 0.0843045439434236,
+    "lockedFraction": 0.02655229992746615,
+    "dynamicFraction": 0.9734477000725339,
+    "dynamicCell2Count": 260838,
+    "dynamicCell2Fraction": 0.9853950072533849,
+    "maxError": 4
+  },
+  "6": {
+    "staticFraction": 0.300531914893617,
+    "lockedFraction": 0.14163178493713732,
+    "dynamicFraction": 0.8583682150628626,
+    "dynamicCell2Count": 239946,
+    "dynamicCell2Fraction": 0.9064691126692457,
+    "maxError": 6
+  },
+  "8": {
+    "staticFraction": 0.47141524117504835,
+    "lockedFraction": 0.3300828472558027,
+    "dynamicFraction": 0.6699171527441973,
+    "dynamicCell2Count": 193606,
+    "dynamicCell2Fraction": 0.7314056455512572,
+    "maxError": 8
+  },
+  "12": {
+    "staticFraction": 0.5907343674443907,
+    "lockedFraction": 0.5314171678554158,
+    "dynamicFraction": 0.4685828321445841,
+    "dynamicCell2Count": 131951,
+    "dynamicCell2Fraction": 0.4984851003384913,
+    "maxError": 11
+  },
+  "16": {
+    "staticFraction": 0.6260870632857833,
+    "lockedFraction": 0.588889854327853,
+    "dynamicFraction": 0.411110145672147,
+    "dynamicCell2Count": 113633,
+    "dynamicCell2Fraction": 0.4292832749032882,
+    "maxError": 14
+  },
+  "24": {
+    "staticFraction": 0.660551975036267,
+    "lockedFraction": 0.6302804264385881,
+    "dynamicFraction": 0.369719573561412,
+    "dynamicCell2Count": 101592,
+    "dynamicCell2Fraction": 0.3837947292069632,
+    "maxError": 23
+  }
+}

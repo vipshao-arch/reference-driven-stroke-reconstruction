@@ -1,0 +1,74 @@
+{
+  "lock8_key8_delta2": {
+    "lockedFraction": 0.3300828472558027,
+    "dynamicFraction": 0.6699171527441973,
+    "rawBytes": 209025364,
+    "deflateBytes": 66094330,
+    "changedPerFrame": 500877.29032258067,
+    "meanMae": 1.641,
+    "maxMae": 1.757
+  },
+  "lock8_key8_delta4": {
+    "lockedFraction": 0.3300828472558027,
+    "dynamicFraction": 0.6699171527441973,
+    "rawBytes": 74040863,
+    "deflateBytes": 32979759,
+    "changedPerFrame": 137870.89516129033,
+    "meanMae": 1.641,
+    "maxMae": 1.757
+  },
+  "lock8_key12_delta2": {
+    "lockedFraction": 0.3300828472558027,
+    "dynamicFraction": 0.6699171527441973,
+    "rawBytes": 210538846,
+    "deflateBytes": 66252220,
+    "changedPerFrame": 524013.4516129032,
+    "meanMae": 1.641,
+    "maxMae": 1.757
+  },
+  "lock8_key12_delta4": {
+    "lockedFraction": 0.3300828472558027,
+    "dynamicFraction": 0.6699171527441973,
+    "rawBytes": 69124530,
+    "deflateBytes": 31526859,
+    "changedPerFrame": 143713.39516129033,
+    "meanMae": 1.641,
+    "maxMae": 1.757
+  },
+  "lock12_key8_delta2": {
+    "lockedFraction": 0.5314171678554158,
+    "dynamicFraction": 0.4685828321445841,
+    "rawBytes": 148242108,
+    "deflateBytes": 50931266,
+    "changedPerFrame": 355819.1612903226,
+    "meanMae": 1.468,
+    "maxMae": 1.681
+  },
+  "lock12_key8_delta4": {
+    "lockedFraction": 0.5314171678554158,
+    "dynamicFraction": 0.4685828321445841,
+    "rawBytes": 62970988,
+    "deflateBytes": 29038966,
+    "changedPerFrame": 126541.70161290323,
+    "meanMae": 1.468,
+    "maxMae": 1.681
+  },
+  "lock12_key12_delta2": {
+    "lockedFraction": 0.5314171678554158,
+    "dynamicFraction": 0.4685828321445841,
+    "rawBytes": 149396414,
+    "deflateBytes": 51031354,
+    "changedPerFrame": 372259.2580645161,
+    "meanMae": 1.468,
+    "maxMae": 1.681
+  },
+  "lock12_key12_delta4": {
+    "lockedFraction": 0.5314171678554158,
+    "dynamicFraction": 0.4685828321445841,
+    "rawBytes": 60080089,
+    "deflateBytes": 28090467,
+    "changedPerFrame": 132104.5,
+    "meanMae": 1.468,
+    "maxMae": 1.681
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "r8_close7": {
+    "lockedFraction": 0.3085503052466151,
+    "dynamicFraction": 0.6914496947533849,
+    "dynamicCell2Count": 186073,
+    "lockedMaxChannelDeviation": 102,
+    "lockedMeanChannelDeviation": 1.422
+  },
+  "r12_close9": {
+    "lockedFraction": 0.5178916827852998,
+    "dynamicFraction": 0.4821083172147002,
+    "dynamicCell2Count": 130273,
+    "lockedMaxChannelDeviation": 107,
+    "lockedMeanChannelDeviation": 1.65
+  },
+  "d6_close9": {
+    "lockedFraction": 0.4929846167794971,
+    "dynamicFraction": 0.5070153832205029,
+    "dynamicCell2Count": 137216,
+    "lockedMaxChannelDeviation": 117,
+    "lockedMeanChannelDeviation": 1.581
+  },
+  "d8_close11": {
+    "lockedFraction": 0.5784432800411026,
+    "dynamicFraction": 0.4215567199588975,
+    "dynamicCell2Count": 114016,
+    "lockedMaxChannelDeviation": 119,
+    "lockedMeanChannelDeviation": 1.707
+  }
+}

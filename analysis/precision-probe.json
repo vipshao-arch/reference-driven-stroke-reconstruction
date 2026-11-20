@@ -1,0 +1,51 @@
+{
+  "2": {
+    "seedFraction": 0.6718627221349129,
+    "dynamicFraction": 0.9374735553675049,
+    "staticFraction": 0.06252644463249517
+  },
+  "3": {
+    "seedFraction": 0.4784013464095745,
+    "dynamicFraction": 0.7389083655705996,
+    "staticFraction": 0.26109163442940037
+  },
+  "4": {
+    "seedFraction": 0.400720238455029,
+    "dynamicFraction": 0.5555271170817214,
+    "staticFraction": 0.4444728829182785
+  },
+  "6": {
+    "seedFraction": 0.3464549081237911,
+    "dynamicFraction": 0.42366379049806574,
+    "staticFraction": 0.5763362095019342
+  },
+  "8": {
+    "seedFraction": 0.3233375770672147,
+    "dynamicFraction": 0.38339239301257255,
+    "staticFraction": 0.6166076069874274
+  },
+  "12": {
+    "seedFraction": 0.2967635547630561,
+    "dynamicFraction": 0.35041782519342357,
+    "staticFraction": 0.6495821748065764
+  },
+  "16": {
+    "seedFraction": 0.2768875800894584,
+    "dynamicFraction": 0.3285490585710832,
+    "staticFraction": 0.6714509414289168
+  },
+  "24": {
+    "seedFraction": 0.24479890745889749,
+    "dynamicFraction": 0.2936043656310445,
+    "staticFraction": 0.7063956343689555
+  },
+  "changed": {
+    "mean": 284449.8951612903,
+    "p50": 256879.5,
+    "p95": 477937.64999999997,
+    "sparseRawBytes": 246903501,
+    "sparseDeflateBytes": 82367182,
+    "denseRawBytes": 393879552,
+    "denseDeflateBytes": 197260353
+  }
+}

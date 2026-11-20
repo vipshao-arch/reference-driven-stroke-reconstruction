@@ -1,0 +1,20 @@
+{
+  "name": "reference-driven-stroke-reconstruction",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "description": "Reference-frame driven parametric stroke animation with a locked WebGL base",
+  "scripts": {
+    "dev": "node tools/serve.mjs",
+    "build": "node tools/build.mjs",
+    "bundle:runtime": "npm run build && node tools/build-runtime-bundle.mjs",
+    "preview": "node tools/serve.mjs dist",
+    "analyze": "python tools/analyze_video.py",
+    "check": "node tools/validate-assets.mjs",
+    "verify:static": "python tools/validate-statics.py",
+    "test": "node tools/app-diagnostics.mjs && node tools/test_modules.mjs && npm run check && npm run verify:static"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

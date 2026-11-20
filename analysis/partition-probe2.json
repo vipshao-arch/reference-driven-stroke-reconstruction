@@ -1,0 +1,23 @@
+{
+  "exact16": {
+    "lockedFraction": 0.5107912989603481,
+    "dynamicFraction": 0.48920870103965186,
+    "dynamicCell2Count": 131963,
+    "lockedMaxChannelDeviation": 61,
+    "lockedMeanChannelDeviation": 1.65
+  },
+  "exact24": {
+    "lockedFraction": 0.5130740374153772,
+    "dynamicFraction": 0.48692596258462284,
+    "dynamicCell2Count": 131307,
+    "lockedMaxChannelDeviation": 61,
+    "lockedMeanChannelDeviation": 1.653
+  },
+  "exact32": {
+    "lockedFraction": 0.513593485553675,
+    "dynamicFraction": 0.48640651444632493,
+    "dynamicCell2Count": 131162,
+    "lockedMaxChannelDeviation": 61,
+    "lockedMeanChannelDeviation": 1.653
+  }
+}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="description" content="将参考视频离线编码为逐帧绘图指令，运行时按时间状态重绘画面，并保持静态 WebGL 基底锁定。" />
+    <title>帧序实验室 · 笔触重建</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23121820'/%3E%3Cpath d='M9 43 C27 8 39 57 56 20' fill='none' stroke='%2368e2ff' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <canvas id="referenceCanvas" class="source-canvas" width="1504" height="704" aria-hidden="true"></canvas>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+          <div>
+            <p class="eyebrow">FRAME / STROKE LAB</p>
+            <h1>帧序笔触重建</h1>
+          </div>
+        </div>
+        <div class="topbar-status">
+          <span class="status-dot" id="statusDot"></span>
+          <span id="statusText">正在加载参考帧…</span>
+          <span class="divider" aria-hidden="true"></span>
+          <span class="mono" id="sourceLabel">1504 × 704 · 24 fps</span>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="stage-column" aria-label="重建画布">
+          <div class="stage-frame" id="stageFrame">
+            <canvas id="renderCanvas" width="1504" height="704" aria-label="WebGL 笔触重建画面"></canvas>
+            <div class="stage-vignette" aria-hidden="true"></div>
+            <div class="stage-labels" aria-hidden="true">
+              <span id="stageLeftLabel">LOCKED RECONSTRUCTION</span>
+              <span id="stageRightLabel">REFERENCE</span>
+            </div>
+            <div class="split-line" id="splitLine" aria-hidden="true"><b></b></div>
+            <div class="frame-badge"><span class="mono" id="frameBadge">F 000</span><span id="modeBadge">复原合成</span></div>
+            <div class="loading-panel" id="loadingPanel">
+              <span class="loading-ring" aria-hidden="true"></span>
+              <p>正在加载绘图指令与锁定基底</p>
+            </div>
+          </div>
+
+          <div class="transport">
+            <button class="icon-button" id="stepBack" type="button" aria-label="上一帧">‹</button>
+            <button class="play-button" id="playButton" type="button" aria-label="播放"><span class="play-icon" aria-hidden="true"></span><span id="playLabel">播放</span></button>
+            <button class="icon-button" id="stepForward" type="button" aria-label="下一帧">›</button>
+            <div class="scrubber">
+              <div class="scrubber-meta">
+                <span class="mono" id="timeLabel">0.000 s</span>
+                <span class="mono" id="frameLabel">0 / 123</span>
+              </div>
+              <input id="frameRange" type="range" min="0" max="123" value="0" step="1" aria-label="时间轴帧位置" />
+              <div class="keyframe-ticks" aria-hidden="true"></div>
+            </div>
+            <label class="speed-control">速率
+              <select id="speedSelect" aria-label="播放速率">
+                <option value="0.5">0.5×</option>
+                <option value="1" selected>1.0×</option>
+                <option value="1.5">1.5×</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="mode-bar" role="group" aria-label="渲染视图">
+            <button class="mode-button is-active" data-mode="composite" type="button">复原合成</button>
+            <button class="mode-button" data-mode="reference" type="button">指令参考</button>
+            <button class="mode-button" data-mode="strokes" type="button">笔触层</button>
+            <button class="mode-button" data-mode="base" type="button">锁定基底</button>
+            <button class="mode-button" data-mode="difference" type="button">差分</button>
+            <button class="mode-button" data-mode="split" type="button">分屏比对</button>
+          </div>
+        </section>
+
+        <aside class="inspector" aria-label="同步分析与控制">
+          <section class="panel sync-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">SYNC</p><h2>参考帧同步</h2></div>
+              <span class="live-chip"><i></i>LIVE</span>
+            </div>
+            <div class="reference-preview">
+              <canvas id="referenceMini" width="376" height="176" aria-label="当前指令重建帧"></canvas>
+              <div class="preview-tag"><span>COMMAND FRAME</span><b class="mono" id="previewFrame">000</b></div>
+            </div>
+            <div class="metric-grid">
+              <div class="metric"><span>帧时间</span><b class="mono" id="mediaTimeMetric">0.000 s</b></div>
+              <div class="metric"><span>同步偏差</span><b class="mono" id="syncDriftMetric">0.0 ms</b></div>
+              <div class="metric"><span>活动笔触</span><b class="mono" id="activeStrokesMetric">0</b></div>
+              <div class="metric"><span>绘图调用 / 帧</span><b class="mono" id="commandsMetric">0</b></div>
+            </div>
+          </section>
+
+          <section class="panel quality-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">FIDELITY</p><h2>逐帧像素比对</h2></div>
+              <span class="quality-score mono" id="qualityScore" data-psnr="">-- dB</span>
+            </div>
+            <div class="quality-row"><span>全画面 MAE</span><b class="mono" id="maeMetric">--</b></div>
+            <div class="quality-row"><span>动态区域 MAE</span><b class="mono" id="dynamicMaeMetric">--</b></div>
+            <div class="quality-row"><span>静态区域帧间 Δ</span><b class="mono accent" id="staticDeltaMetric">--</b></div>
+            <div class="quality-row"><span>锁定像素</span><b class="mono" id="lockedMetric" data-locked="">--%</b></div>
+            <div class="quality-track"><span id="qualityBar"></span></div>
+            <p class="panel-note">离线指令提供逐帧像素锚点；笔触状态决定形变与局部重绘区域，遮罩内的 WebGL 基底始终不参与时序更新。</p>
+          </section>
+
+          <section class="panel motion-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">MOTION</p><h2>位移与形变</h2></div>
+              <span class="mono sample-label">31 关键帧</span>
+            </div>
+            <div class="chart-wrap">
+              <svg id="motionChart" viewBox="0 0 960 280" role="img" aria-label="各时刻位移与形变曲线"></svg>
+              <span id="chartMarker" aria-hidden="true"></span>
+            </div>
+            <div class="chart-legend"><span><i class="cyan"></i>平均位移</span><span><i class="pink"></i>平均形变</span></div>
+            <div class="motion-stats">
+              <div><span>当前位移</span><b class="mono" id="currentDisplacement">-- px</b></div>
+              <div><span>当前形变</span><b class="mono" id="currentDeformation">--</b></div>
+            </div>
+          </section>
+
+          <section class="panel controls-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">PARAMETERS</p><h2>重建参数</h2></div>
+              <button class="text-button" id="resetButton" type="button">重置</button>
+            </div>
+            <label class="switch-row"><span><b>锁定 WebGL 基底</b><small>遮罩白色区域保持时序不变</small></span><input id="lockToggle" type="checkbox" checked /><i aria-hidden="true"></i></label>
+            <label class="switch-row"><span><b>指令帧驱动形状</b><small>逐帧绘图指令校正中心、半径与颜色</small></span><input id="driveToggle" type="checkbox" checked /><i aria-hidden="true"></i></label>
+            <div class="slider-row">
+              <div class="slider-heading"><label for="strokeInfluence">笔触贡献</label><b class="mono" id="strokeInfluenceValue">0.18</b></div>
+              <input id="strokeInfluence" type="range" min="0" max="1" step="0.01" value="0.18" />
+              <small>提高数值可观察椭圆、线段和贝塞尔笔触的独立造型。</small>
+            </div>
+            <div class="slider-row split-only" id="splitControl">
+              <div class="slider-heading"><label for="splitRange">分屏位置</label><b class="mono" id="splitValue">50%</b></div>
+              <input id="splitRange" type="range" min="0" max="100" step="1" value="50" />
+            </div>
+            <div class="lock-thumbnails">
+              <figure><img src="/assets/static-base.png" alt="锁定的静态基底" /><figcaption>静态基底</figcaption></figure>
+              <figure><img src="/assets/static-lock.png" alt="静态区域锁定遮罩" /><figcaption>锁定遮罩</figcaption></figure>
+            </div>
+          </section>
+
+          <section class="panel strokes-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">ACTIVE COMMANDS</p><h2>当前笔触状态</h2></div>
+              <span class="mono sample-label" id="primitiveCount">--</span>
+            </div>
+            <div class="stroke-list" id="strokeList" aria-live="polite"></div>
+          </section>
+
+          <section class="panel validation-panel">
+            <div class="panel-heading">
+              <div><p class="eyebrow">VALIDATION</p><h2>时序与锁定自检</h2></div>
+            </div>
+            <button class="verify-button" id="verifyButton" type="button">运行 3 帧同步验证</button>
+            <output id="verificationResult" class="verification-result" data-status="" aria-live="polite">尚未运行</output>
+          </section>
+        </aside>
+      </main>
+
+      <footer class="footer">
+        <span class="mono">PRE-ANALYSIS → DRAWING COMMANDS → TIME STATES → REFERENCE SYNC → LOCKED WEBGL COMPOSITE</span>
+        <span>源视频 124 帧仅离线预分析 · 运行时无视频</span>
+      </footer>
+    </div>
+
+    <div class="fatal-panel" id="fatalPanel" hidden><h2>初始化失败</h2><p id="fatalMessage"></p></div>
+    <script type="module" src="/src/app.js"></script>
+  </body>
+</html>
